@@ -39,6 +39,15 @@ const Home = () => {
         }
     }
 
+    const handleLabelClick = (e) => {
+        if (e.target.closest('button')) {
+            return
+        }
+        if (resumeInputRef.current) {
+            resumeInputRef.current.click()
+        }
+    }
+
     const handleGenerateReport = async () => {
         const fileToUpload = resumeFile || resumeInputRef.current.files[0]
         const data = await generateReport({ jobDescription, selfDescription, resumeFile: fileToUpload })
@@ -104,11 +113,11 @@ const Home = () => {
                             </label>
                             <label 
                                 className={`dropzone ${dragActive ? 'dropzone--active' : ''}`} 
-                                htmlFor='resume'
                                 onDragEnter={handleDrag}
                                 onDragOver={handleDrag}
                                 onDragLeave={handleDrag}
                                 onDrop={handleDrop}
+                                onClick={handleLabelClick}
                             >
                                 {resumeFile ? (
                                     <div className="file-info" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', pointerEvents: 'none' }}>
