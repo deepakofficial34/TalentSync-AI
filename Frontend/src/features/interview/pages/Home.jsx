@@ -146,8 +146,8 @@ const Home = () => {
                                         <p className='dropzone__subtitle'>PDF or DOCX (Max 5MB)</p>
                                     </>
                                 )}
-                                <input ref={resumeInputRef} onChange={handleFileChange} style={{ display: 'none' }} type='file' id='resume' name='resume' accept='.pdf,.docx' />
                             </label>
+                            <input ref={resumeInputRef} onChange={handleFileChange} style={{ display: 'none' }} type='file' id='resume' name='resume' accept='.pdf,.docx' />
                         </div>
 
                         {/* OR Divider */}
