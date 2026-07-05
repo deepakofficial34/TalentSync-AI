@@ -5,6 +5,16 @@ TalentSync-AI is a full-stack web application designed for software engineers lo
 
 **Live Website**: [https://talentsync-ai-yv65.onrender.com](https://talentsync-ai-yv65.onrender.com)
 
+#### 📸 Application Screenshots
+
+| Main Dashboard | Technical Preparation |
+| :---: | :---: |
+| ![Dashboard](docs/assets/dashboard.png) | ![Technical Prep](docs/assets/technical_questions.png) |
+
+| Behavioral Preparation | Day-wise Roadmap |
+| :---: | :---: |
+| ![Behavioral Prep](docs/assets/behavioral_questions.png) | ![Roadmap](docs/assets/roadmap.png) |
+
 ---
 
 ### 2. Key Features
