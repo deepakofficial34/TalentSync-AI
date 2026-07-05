@@ -1,14 +1,12 @@
-# AI-Prep: AI-Powered Full-Stack Interview Preparation Platform
+# TalentSync-AI: AI-Powered Full-Stack GenAI Interview Preparation Platform
 
-**AI-Prep** is a production-grade, full-stack web application built on the **MERN (MongoDB, Express, React, Node.js) stack** that leverages **Google Gemini (GenAI)** to construct tailored mock interviews, identify skill gaps, and dynamically render custom ATS-friendly resumes. 
-
-Designed for modern SDE candidates, this platform automates the alignment between a candidate's profile (resume & self-description) and targeted job requirements, providing a data-driven, structured roadmap to interview success.
+**TalentSync-AI** is a production-grade, **AI-powered website** built on the **MERN (MongoDB, Express, React, Node.js) stack** featuring advanced **GenAI integration** and **LLM API calls**. The platform helps software developers prepare for technical interviews by matching their profiles against job descriptions to identify skill gaps, generate custom roadmaps, and perform instant **resume generation** with tailored **PDF downloads**.
 
 ---
 
 ## 🏗️ System Architecture
 
-The application is structured as a decoupled full-stack architecture built to handle file uploads, asynchronous AI processing, and dynamic PDF generation.
+The application is structured as a decoupled full-stack architecture built to handle **drag-and-drop resume** uploads, asynchronous **LLM API calls**, and dynamic **PDF generation**.
 
 ```mermaid
 graph TD
@@ -42,7 +40,7 @@ graph TD
 ```
 
 ```text
-interview-ai-yt-main/
+TalentSync-AI/
 ├── Backend/              # Node.js + Express API Server
 │   ├── src/
 │   │   ├── config/      # Database & Environment Configuration
@@ -65,20 +63,20 @@ interview-ai-yt-main/
 
 ---
 
-## 🛠️ Key Technical Implementations
+## 🛠️ Key Technical Implementations (GenAI & SDE Core)
 
-### 1. Structured GenAI Schema Enforcements
-Rather than relying on raw text LLM responses, the platform integrates the official `@google/genai` SDK with **Zod Schemas** to enforce structured JSON output formats.
-*   The AI service maps the output schema to Zod objects using `zod-to-json-schema`, guaranteeing the model (`gemini-2.5-flash`) responds with valid JSON matching fields such as `matchScore`, `technicalQuestions`, `behavioralQuestions`, `skillGaps`, and a day-wise `preparationPlan`.
-*   This approach eliminates AI hallucination and parsing issues, providing a seamless data flow from the LLM to MongoDB and the React frontend.
+### 1. GenAI Integration & Structured LLM API Calls
+*   Leverages the official `@google/genai` SDK to make structured **LLM API calls** using Google's **Gemini 2.5 Flash** model.
+*   Enforces strict JSON schema validation by compiling **Zod schemas** into JSON schema definitions (`zod-to-json-schema`), guaranteeing that the LLM response is perfectly parseable and directly maps to our database schemas.
 
-### 2. PDF Parsing & Headless Browser Rendering
-*   **Resume Reading**: The backend parses uploaded PDF resumes using a binary stream reader (`pdf-parse`) and feeds raw text parameters directly into the AI prompt runner.
-*   **Tailored PDF Exports**: The AI model generates a custom, ATS-friendly HTML template matching the target job description. The backend instantiates a headless **Puppeteer** instance to compile the generated HTML into a print-ready A4 PDF binary stream, serving it back to the client as an immediate file download attachment.
+### 2. Drag-and-Drop Resume Uploads & PDF Processing
+*   **Drag-and-Drop Resume Uploader**: Implements HTML5 drag-and-drop React handlers with active file state tracking, displaying the selected file name and providing custom validation.
+*   **Resume Generation**: The backend uses PDF parsing (`pdf-parse`) to extract text from resumes and prompts Gemini to write tailored, ATS-friendly HTML resumes.
+*   **Download PDF**: The server launches a headless **Puppeteer** browser instance to compile the generated HTML into print-ready A4 binary streams, enabling users to **download PDF** resumes on demand.
 
-### 3. Production-Ready Configuration & CORS
-*   Fully stateless session design utilizing secure, HTTP-Only **JWT (JSON Web Token)** cookie-based authentication.
-*   CORS policies, server port bindings, and API requests dynamically scale using environmental variables (`FRONTEND_URL`, `VITE_API_BASE_URL`), allowing the application to be deployed seamlessly across separate cloud hosting services.
+### 3. Production Deployment & CORS Handling
+*   Fully stateless session design utilizing secure, SameSite=None, HTTP-Only cookie authentication alongside an `Authorization: Bearer <token>` header fallback to bypass modern third-party cookie blocking (e.g. Safari's ITP).
+*   Dynamic CORS configuration accepting whitelisted origins via the `FRONTEND_URL` environment variable.
 
 ---
 
@@ -86,8 +84,8 @@ Rather than relying on raw text LLM responses, the platform integrates the offic
 
 *   **Frontend**: React (v19), React Router (v7), Vite, Sass/SCSS, Axios (custom HTTP client)
 *   **Backend**: Node.js, Express.js (v5), MongoDB, Mongoose ODM
-*   **Generative AI**: Google Gen AI SDK (`@google/genai`), Gemini 2.5 Flash
-*   **Document Processing**: Puppeteer (headless PDF engine), PDF-parse, Multer (multipart form parser)
+*   **AI Integration**: `@google/genai` (Gemini API), `zod-to-json-schema`
+*   **PDF Compiler**: Puppeteer (headless PDF engine), PDF-parse, Multer (multipart form parser)
 *   **Security & Auth**: JWT (jsonwebtoken), BcryptJS (salted password hashing), Cookie-Parser
 
 ---
@@ -97,14 +95,16 @@ Rather than relying on raw text LLM responses, the platform integrates the offic
 Create a `.env` file in the `/Backend` directory:
 ```env
 PORT=3000
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/ai-prep
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/talentsync-db
 JWT_SECRET=your_jwt_signing_secret_key
 GOOGLE_GENAI_API_KEY=your_gemini_api_key
+FRONTEND_URL=https://talentsync-ai-yv65.onrender.com
+PUPPETEER_CACHE_DIR=/opt/render/project/src/Backend/.puppeteer
 ```
 
 Create a `.env` file in the `/Frontend` directory:
 ```env
-VITE_API_BASE_URL=http://localhost:3000
+VITE_API_BASE_URL=https://talentsync-ai-2od4.onrender.com
 ```
 
 ---
@@ -135,14 +135,14 @@ Development client runs on: `http://localhost:5173`
 *   **Build Command**: `npm run build`
 *   **Publish Directory**: `dist`
 *   **Environment Variables**:
-    *   `VITE_API_BASE_URL`: `https://your-backend-service.onrender.com`
+    *   `VITE_API_BASE_URL`: `https://talentsync-ai-2od4.onrender.com`
 
 ### ⚙️ Backend Deploy (Render Web Service)
-*   **Build Command**: `npm install`
+*   **Build Command**: `npm install && npx puppeteer browsers install chrome` (downloads chrome into target project directory)
 *   **Start Command**: `node server.js`
 *   **Environment Variables**:
     *   `MONGO_URI` (MongoDB Atlas production URI)
     *   `JWT_SECRET` (Secure JWT key)
     *   `GOOGLE_GENAI_API_KEY` (Gemini API key)
     *   `FRONTEND_URL` (URL of your deployed static frontend)
-    *   `PUPPETEER_SKIP_CHROMIUM_DOWNLOAD` = `true` (Tells Puppeteer to bypass downloading chromium and use Render's built-in chromium instance to save space/time)
+    *   `PUPPETEER_CACHE_DIR` = `/opt/render/project/src/Backend/.puppeteer` (maps cache to local persistent folder)
