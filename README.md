@@ -1,7 +1,7 @@
 # TalentSync-AI
 
 ### 1. Project Overview
-TalentSync-AI is a full-stack web application designed for software engineers looking to optimize their technical interview preparation. Built using the MERN stack (MongoDB, Express, React, Node.js), the platform integrates the Google Gemini API to analyze candidate resumes against target job descriptions. By automating skill gap identification, generating day-by-day learning roadmaps, and providing instant PDF resume tailoring, it helps developers focus their study efforts and stand out to technical recruiters.
+TalentSync-AI is an AI-powered full-stack web application built with the MERN stack (MongoDB, Express, React, and Node.js) that helps software engineers prepare for technical interviews. It integrates the Google Gemini API to analyze resumes against target job descriptions, identify skill gaps, generate personalized learning roadmaps, and create ATS-friendly resumes with PDF download support.
 
 **Live Website**: [https://talentsync-ai-yv65.onrender.com](https://talentsync-ai-yv65.onrender.com)
 
