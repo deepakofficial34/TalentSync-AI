@@ -1,7 +1,7 @@
 # TalentSync-AI
 
 ### 1. Project Overview
-TalentSync-AI is an AI-powered full-stack web application built with the MERN stack (MongoDB, Express, React, and Node.js) that helps software engineers prepare for technical interviews. It integrates the Google Gemini API to analyze resumes against target job descriptions, identify skill gaps, generate personalized learning roadmaps, and create ATS-friendly resumes with PDF download support.
+TalentSync-AI is an AI powered Fullstack web application built with the MERN stack (MongoDB, Express, React, and Node.js) that helps software engineers prepare for technical interviews. It integrates the Google Gemini API to analyze resumes against target job descriptions, identify skill gaps, generate personalized learning roadmaps, and create ATS friendly resumes with PDF download support.
 
 **Live Website**: [https://talentsync-ai-yv65.onrender.com](https://talentsync-ai-yv65.onrender.com)
 
@@ -23,11 +23,11 @@ TalentSync-AI is an AI-powered full-stack web application built with the MERN st
 
 ### 2. Key Features
 *   **Secure Authentication**: Handles user registration and logins using JWT authentication with secure HTTP-only cookies and header-based fallbacks.
-*   **Drag-and-Drop Resume**: React-based drag-and-drop file uploader with real-time UI file validation.
+*   **Drag-and-Drop Resume**: React based drag and drop file uploader with real time UI file validation.
 *   **PDF Resume Parsing**: Extracts raw text from binary PDF uploads using a backend parsing stream.
 *   **Job Description Matching**: Compares parsed candidate resumes against job descriptions using LLM analysis.
 *   **Skill Gap Analysis**: Identifies missing technical competencies and ranks them by severity (low, medium, high).
-*   **Personalized Learning Roadmaps**: Builds customized, day-by-day schedules to address gaps.
+*   **Personalized Learning Roadmaps**: Builds customized, day by day schedules to address gaps.
 *   **ATS Resume Generation**: Generates targeted, professional resume HTML tailored to the job description.
 *   **Resume PDF Download**: Converts generated HTML resumes into print-ready A4 PDF downloads using Puppeteer.
 *   **LLM API Integration**: Implements Google Gemini 2.5 Flash API calls with Zod schema validations for structured JSON responses.
@@ -79,12 +79,12 @@ TalentSync-AI/
 ### 5. How It Works
 The platform runs through the following sequence during a matching workflow:
 
-1.  **Resume Upload**: The candidate uploads their PDF resume via the drag-and-drop uploader.
+1.  **Resume Upload**: The candidate uploads their PDF resume via the drag and drop uploader.
 2.  **PDF Parsing**: The backend extracts raw text streams from the uploaded file using `pdf-parse`.
-3.  **Gemini API Processing**: The backend compiles the extracted resume text, self-description, and job description, and makes an LLM API call to Google Gemini.
+3.  **Gemini API Processing**: The backend compiles the extracted resume text, self description, and job description, and makes an LLM API call to Google Gemini.
 4.  **Skill Gap Analysis**: Gemini returns structured JSON evaluating match scores and identifying missing technical skills.
-5.  **Roadmap Generation**: A day-by-day roadmap is generated to schedule candidate interview preparation.
-6.  **Resume Generation**: Gemini generates a custom, ATS-friendly HTML template tailored to the target job description.
+5.  **Roadmap Generation**: A day by day roadmap is generated to schedule candidate interview preparation.
+6.  **Resume Generation**: Gemini generates a custom, ATS friendly HTML template tailored to the target job description.
 7.  **PDF Download**: Puppeteer spins up a headless Chrome instance to compile the generated HTML template into a downloadable A4 PDF document.
 
 ---
