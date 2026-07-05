@@ -22,8 +22,8 @@ TalentSync-AI is an AI powered Fullstack web application built with the MERN sta
 ---
 
 ### 2. Key Features
-*   **Secure Authentication**: Handles user registration and logins using JWT authentication with secure HTTP-only cookies and header-based fallbacks.
-*   **Drag-and-Drop Resume**: React based drag and drop file uploader with real time UI file validation.
+*   **Secure Authentication**: Handles user registration and logins using JWT authentication with secure HTTP only cookies and header based fallbacks.
+*   **Drag and Drop Resume**: React based drag and drop file uploader with real time UI file validation.
 *   **PDF Resume Parsing**: Extracts raw text from binary PDF uploads using a backend parsing stream.
 *   **Job Description Matching**: Compares parsed candidate resumes against job descriptions using LLM analysis.
 *   **Skill Gap Analysis**: Identifies missing technical competencies and ranks them by severity (low, medium, high).
