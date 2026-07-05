@@ -1,14 +1,25 @@
 # TalentSync-AI
 
-An AI-powered interview preparation and resume tailoring platform built on the MERN stack. TalentSync-AI compares your resume and target job descriptions using Google Gemini to identify skill gaps, generate daily roadmaps, build custom mock interview questions, and compile tailored, ATS-friendly resumes into downloadable PDFs.
-
-Live Links:
-*   **Frontend**: [https://talentsync-ai-yv65.onrender.com](https://talentsync-ai-yv65.onrender.com)
-*   **Backend API**: [https://talentsync-ai-2od4.onrender.com](https://talentsync-ai-2od4.onrender.com)
+### 1. Project Overview
+TalentSync-AI is a full-stack web application designed for software engineers looking to optimize their technical interview preparation. Built using the MERN stack (MongoDB, Express, React, Node.js), the platform integrates the Google Gemini API to analyze candidate resumes against target job descriptions. By automating skill gap identification, generating day-by-day learning roadmaps, and providing instant PDF resume tailoring, it helps developers focus their study efforts and stand out to technical recruiters.
 
 ---
 
-## 🏗️ System Architecture
+### 2. Key Features
+*   **Secure Authentication**: Handles user registration and logins using JWT authentication with secure HTTP-only cookies and header-based fallbacks.
+*   **Drag-and-Drop Resume**: React-based drag-and-drop file uploader with real-time UI file validation.
+*   **PDF Resume Parsing**: Extracts raw text from binary PDF uploads using a backend parsing stream.
+*   **Job Description Matching**: Compares parsed candidate resumes against job descriptions using LLM analysis.
+*   **Skill Gap Analysis**: Identifies missing technical competencies and ranks them by severity (low, medium, high).
+*   **Personalized Learning Roadmaps**: Builds customized, day-by-day schedules to address gaps.
+*   **ATS Resume Generation**: Generates targeted, professional resume HTML tailored to the job description.
+*   **Resume PDF Download**: Converts generated HTML resumes into print-ready A4 PDF downloads using Puppeteer.
+*   **LLM API Integration**: Implements Google Gemini 2.5 Flash API calls with Zod schema validations for structured JSON responses.
+
+---
+
+### 3. System Architecture
+The application runs as a decoupled full-stack client-server architecture:
 
 ```mermaid
 graph TD
@@ -28,53 +39,83 @@ graph TD
 
 ---
 
-## 🌟 Key Features
-
-*   **GenAI Prep Strategy**: Uses the new `@google/genai` SDK and Zod schema validations to get structured analysis (match scores, day-wise prep roadmaps, and custom technical/behavioral practice questions).
-*   **ATS Resume Generation**: Generates a tailored HTML resume based on the job description and uses Puppeteer on the backend to print it into a clean, downloadable A4 PDF.
-*   **Drag-and-Drop Uploader**: Custom React file selector with live feedback (shows file name, type validation, and a remove button).
-*   **Stateless Auth Guard**: Uses secure HTTP-only cookies with a Bearer token header fallback to make authentication work seamlessly across different domains (especially on Safari, which blocks third-party cookies).
-
----
-
-## 🛠️ Tech Stack
-
-*   **Frontend**: React 19, React Router v7, Sass, Axios
-*   **Backend**: Node.js, Express, Mongoose, Multer (file uploads), PDF-parse (extracting text from PDFs)
-*   **AI & PDF Compiler**: Google Gemini 2.5 Flash, Puppeteer (headless Chrome)
-*   **Database & Cloud**: MongoDB Atlas, Render (hosting)
-
----
-
-## ⚙️ Environment Variables
-
-### Backend (`Backend/.env`)
-```env
-PORT=3000
-MONGO_URI=mongodb+srv://...
-JWT_SECRET=your_jwt_signing_key
-GOOGLE_GENAI_API_KEY=your_gemini_api_key
-FRONTEND_URL=https://talentsync-ai-yv65.onrender.com
-PUPPETEER_CACHE_DIR=/opt/render/project/src/Backend/.puppeteer
-```
-
-### Frontend (`Frontend/.env`)
-```env
-VITE_API_BASE_URL=https://talentsync-ai-2od4.onrender.com
+### 4. Project Structure
+```text
+TalentSync-AI/
+├── Backend/              # Node.js + Express API Server
+│   ├── src/
+│   │   ├── config/      # Database connection & environment configuration
+│   │   ├── controllers/ # Request controllers (Auth, AI Report Engine)
+│   │   ├── middlewares/ # Auth validation (JWT) and file upload handlers (Multer)
+│   │   ├── models/      # Mongoose Schemas (User, InterviewReport, Blacklist)
+│   │   ├── routes/      # Express API router endpoints
+│   │   └── services/    # Google GenAI service & Puppeteer PDF compiler
+│   └── server.js        # API entrance point & Port listener
+└── Frontend/             # React 19 Client Dashboard
+    ├── src/
+    │   ├── features/    # Module-based features (Auth, Interview pages)
+    │   ├── style/       # Modular SCSS stylesheets
+    │   └── main.jsx     # Frontend entry point
 ```
 
 ---
 
-## 🚀 Local Setup
+### 5. How It Works
+The platform runs through the following sequence during a matching workflow:
 
-### 1. Backend API
+1.  **Resume Upload**: The candidate uploads their PDF resume via the drag-and-drop uploader.
+2.  **PDF Parsing**: The backend extracts raw text streams from the uploaded file using `pdf-parse`.
+3.  **Gemini API Processing**: The backend compiles the extracted resume text, self-description, and job description, and makes an LLM API call to Google Gemini.
+4.  **Skill Gap Analysis**: Gemini returns structured JSON evaluating match scores and identifying missing technical skills.
+5.  **Roadmap Generation**: A day-by-day roadmap is generated to schedule candidate interview preparation.
+6.  **Resume Generation**: Gemini generates a custom, ATS-friendly HTML template tailored to the target job description.
+7.  **PDF Download**: Puppeteer spins up a headless Chrome instance to compile the generated HTML template into a downloadable A4 PDF document.
+
+---
+
+### 6. Tech Stack
+
+| Layer | Technologies Used |
+| :--- | :--- |
+| **Frontend** | React 19, React Router v7, Sass, Axios |
+| **Backend** | Node.js, Express.js |
+| **Database** | MongoDB Atlas, Mongoose ODM |
+| **AI** | Google Gemini 2.5 Flash, Zod, Zod-to-JSON Schema |
+| **Authentication** | JWT (jsonwebtoken), BcryptJS, Cookie-Parser |
+| **Deployment** | Render (Web Service & Static Site) |
+| **Tools** | Puppeteer, PDF-Parse, Multer |
+
+---
+
+### 7. Environment Variables
+
+#### Backend (`Backend/.env`)
+| Variable | Type | Description |
+| :--- | :--- | :--- |
+| `PORT` | Number | Port the server listens on (defaults to 3000). |
+| `MONGO_URI` | String | MongoDB Atlas database connection string. |
+| `JWT_SECRET` | String | Key used to sign JWT authentication tokens. |
+| `GOOGLE_GENAI_API_KEY` | String | Google Gemini API developer key. |
+| `FRONTEND_URL` | String | URL of the live frontend. |
+| `PUPPETEER_CACHE_DIR` | String | Cache location for Puppeteer Chrome downloads. |
+
+#### Frontend (`Frontend/.env`)
+| Variable | Type | Description |
+| :--- | :--- | :--- |
+| `VITE_API_BASE_URL` | String | URL of the backend API server. |
+
+---
+
+### 8. Local Setup
+
+#### 1. Setup the Backend API Server
 ```bash
 cd Backend
 npm install
 npm run dev
 ```
 
-### 2. Frontend client
+#### 2. Setup the Frontend React Client
 ```bash
 cd Frontend
 npm install
@@ -83,20 +124,17 @@ npm run dev
 
 ---
 
-## 🌐 Deploying to Render (Free Tier)
-
-Since Render's container filesystem is ephemeral (it doesn't keep files downloaded outside the project folder between builds and restarts), we have a custom config to run Puppeteer:
-
-1.  **Build Command**: Update the backend build command to:
-    ```bash
-    npm install && npx puppeteer browsers install chrome
-    ```
-2.  **Cache Directory**: Add an environment variable `PUPPETEER_CACHE_DIR` set to `/opt/render/project/src/Backend/.puppeteer`.
-3.  **CORS Setup**: Add the `FRONTEND_URL` environment variable pointing to your frontend URL. The backend automatically normalizes trailing slashes.
+### 9. Deployment
+*   **Render**: Hosts the frontend as a Static Site and the backend as a Web Service. The backend build command is configured as `npm install && npx puppeteer browsers install chrome` to ensure Chrome is installed locally for PDF exports.
+*   **MongoDB Atlas**: Serves as the cloud database engine. Whitelist `0.0.0.0/0` in Atlas Network Access to allow Render backend servers to connect.
+*   **Google Gemini API**: Handles prompt engineering queries under the free developer tier.
 
 ---
 
-## 🔮 Future Roadmap
-*   **Voice Mock Interviews**: Implementing real-time mock interviews using WebRTC voice inputs.
-*   **RAG (Retrieval-Augmented Generation)**: Storing past interview questions in a vector database (e.g. Pinecone) to ground AI responses.
-*   **Redis Caching**: Cache common job descriptions to avoid redundant LLM API calls.
+### 10. Future Improvements
+*   **Interview Voice Assistant**: Integrating real-time WebRTC audio streams to conduct voice-based mock interviews.
+*   **Docker Support**: Adding Dockerfiles and docker-compose configurations to ease local environment setups.
+*   **Redis Caching**: Caching frequently processed job descriptions to minimize redundant LLM API queries.
+*   **CI/CD Pipeline**: Establishing GitHub Actions for automated unit testing and deployment.
+*   **Analytics Dashboard**: Tracking match score progression across multiple user resumes.
+*   **Unit & Integration Tests**: Writing backend tests (Jest) and frontend component checks (React Testing Library).
