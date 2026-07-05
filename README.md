@@ -7,13 +7,17 @@ TalentSync-AI is a full-stack web application designed for software engineers lo
 
 #### 📸 Application Screenshots
 
-| Main Dashboard | Technical Preparation |
-| :---: | :---: |
-| ![Dashboard](docs/assets/dashboard.png) | ![Technical Prep](docs/assets/technical_questions.png) |
+**Main Dashboard**
+![Dashboard](docs/assets/dashboard.png)
 
-| Behavioral Preparation | Day-wise Roadmap |
-| :---: | :---: |
-| ![Behavioral Prep](docs/assets/behavioral_questions.png) | ![Roadmap](docs/assets/roadmap.png) |
+**Technical Preparation Page**
+![Technical Prep](docs/assets/technical_questions.png)
+
+**Behavioral Preparation Page**
+![Behavioral Prep](docs/assets/behavioral_questions.png)
+
+**Day-wise Roadmap Page**
+![Roadmap](docs/assets/roadmap.png)
 
 ---
 
