@@ -17,7 +17,7 @@
 
 *   **Frontend Client**: [https://talentsync-ai-yv65.onrender.com](https://talentsync-ai-yv65.onrender.com)
 *   **Backend Server API**: [https://talentsync-ai-2od4.onrender.com](https://talentsync-ai-2od4.onrender.com)
-*   **Demo Video Walkthrough**: *[Placeholder: Add your YouTube or Loom walk-through link here]*
+
 
 ---
 
