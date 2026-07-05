@@ -397,13 +397,6 @@ Render's server environments run on Ubuntu containers, where the default home di
 
 ---
 
-## 🎯 Resume-Worthy Engineering Competencies
-
-As a senior-level full-stack project, TalentSync-AI showcases key software engineering principles:
-*   **GenAI Schema Validation**: Enforces structured JSON from LLMs using Zod schema mapping, eliminating AI text parsing errors.
-*   **Asynchronous Resource Pipelines**: Manages asynchronous file streams (Multer), text parsing (pdf-parse), and headless browser compilation (Puppeteer) in a non-blocking execution loop.
-*   **Stateless API Security**: Uses secure cookie verification with a fallback to `Authorization` headers to handle cross-origin authentication across browsers.
-*   **Production DevOps**: Configures custom caching directories for headless Puppeteer runs on Render server environments.
 
 ---
 
